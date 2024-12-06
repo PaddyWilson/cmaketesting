@@ -4,5 +4,5 @@ build/
 premake/Makefile
 .vs
 *.sln
-external/
-!external/CMakeList.txt
+external/*
+!external/CMakeLists.txt
