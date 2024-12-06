@@ -1,0 +1,8 @@
+out/
+build/
+*/build/*
+premake/Makefile
+.vs
+*.sln
+external/
+!external/CMakeList.txt
