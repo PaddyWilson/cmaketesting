@@ -1,6 +1,7 @@
 #include "PreFabs.h"
 
 #include "Vector2Math.h"
+#include <raymath.h>
 
 #define Vector2D_Zero Vector2d{0.f,0.f}
 
@@ -38,9 +39,9 @@ entt::entity Prefabs::CreateCamera(entt::registry* reg, Vector2 postion, Vector2
 
 entt::entity Prefabs::CreateSprite(entt::registry* reg, float x, float y, float size_x, float size_y, string texture)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Sprite", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Sprite", 0);
 	reg->emplace<Velocity>(entity, 0.f, 0.f, 0.f);
-	AddRectangle(reg, entity, Vector2(size_x / 2, size_y / 2), false);
+	AddRectangle(reg, entity, Vector2{ size_x / 2, size_y / 2 }, false);
 	//reg->emplace<>(entity, size_x, size_y);
 
 	SpriteComp* sprite = &reg->emplace<SpriteComp>(entity, texture);
@@ -53,7 +54,7 @@ entt::entity Prefabs::CreateSprite(entt::registry* reg, float x, float y, float 
 
 entt::entity Prefabs::CreateSpriteCircle(entt::registry* reg, float x, float y, float size_x, float size_y, string texture)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "SpriteC", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "SpriteC", 0);
 
 	reg->emplace<Velocity>(entity, 0.f, 0.f, 0.f);
 	//AddRectangle(reg, entity, Vector2(size_x / 2, size_y / 2), false);
@@ -68,9 +69,9 @@ entt::entity Prefabs::CreateSpriteCircle(entt::registry* reg, float x, float y, 
 
 entt::entity Prefabs::CreateRectangle(entt::registry* reg, float x, float y, float size_x, float size_y, Color color)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Rectangle", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Rectangle", 0);
 	reg->emplace<Velocity>(entity, 0.f, 0.f, 0.f);
-	AddRectangle(reg, entity, Vector2(size_x / 2, size_y / 2), false);
+	AddRectangle(reg, entity, Vector2{ size_x / 2, size_y / 2 }, false);
 	reg->emplace<RectangleComp>(entity, Vector2{ size_x / 2, size_y / 2 }, color);
 	reg->emplace<Renderable>(entity);
 	return entity;
@@ -78,7 +79,7 @@ entt::entity Prefabs::CreateRectangle(entt::registry* reg, float x, float y, flo
 
 entt::entity Prefabs::CreateCircle(entt::registry* reg, float x, float y, float radious, Color color)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Circle", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Circle", 0);
 	reg->emplace<Velocity>(entity, 0.f, 0.f, 0.f);
 	AddCircle(reg, entity, radious / 2, false);
 	reg->emplace<CircleComp>(entity, radious, color);
@@ -88,7 +89,7 @@ entt::entity Prefabs::CreateCircle(entt::registry* reg, float x, float y, float 
 
 entt::entity Prefabs::CreateLine(entt::registry* reg, float x, float y, float size_x, float size_y, Color color)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(size_x / 2, size_y / 2), 0.f, "Line", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ size_x / 2, size_y / 2 }, 0.f, "Line", 0);
 	reg->emplace<Velocity>(entity, 0.f, 0.f, 0.f);
 	reg->emplace<LineComp>(entity, Vector2{ x, y }, Vector2{ size_x, size_y }, 1.f, color);
 	reg->emplace<Renderable>(entity);
@@ -102,10 +103,10 @@ entt::entity Prefabs::CreateButton(entt::registry* reg, string text, float x, fl
 	auto s = MeasureTextEx(GetFontDefault(), text.c_str(), (float)size, padding) / 2;
 
 	//create entitys
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Button", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Button", 0);
 
 	reg->emplace<RectangleComp>(entity, Vector2{ s.x, s.y }, color);
-	AddRectangle(reg, entity, Vector2(s.x, s.y), false);
+	AddRectangle(reg, entity, Vector2{ s.x, s.y }, false);
 	reg->emplace<TextComp>(entity, text, size, padding, textColor);
 	reg->emplace<Clickable>(entity, Clickable::Action::PRESSED, func);
 	reg->emplace<Renderable>(entity);
@@ -118,38 +119,38 @@ entt::entity Prefabs::CreateButtonUI(entt::registry* reg, string text, float x, 
 	auto s = MeasureTextEx(GetFontDefault(), text.c_str(), (float)size, 0.1) / 2;
 
 	//create entitys
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Button", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Button", 0);
 
 	reg->emplace<RectangleComp>(entity, Vector2{ s.x, s.y }, color);
-	AddRectangle(reg, entity, Vector2(s.x, s.y), false);
+	AddRectangle(reg, entity, Vector2{ s.x, s.y }, false);
 	reg->emplace<TextComp>(entity, text, size, 0.1f, textColor);
 	reg->emplace<Clickable>(entity, Clickable::Action::PRESSED, func);
 	reg->emplace<RenderableUI>(entity);
 	return entity;
 }
 
-entt::entity Prefabs::CreateBox2dRec(entt::registry* reg, b2World& world, float x, float y, float halfX, float halfY, Rigidbody2D::RigidbodyType dynamic, Color color)
+entt::entity Prefabs::CreateBox2dRec(entt::registry* reg, b2WorldId world, float x, float y, float halfX, float halfY, Rigidbody2D::RigidbodyType dynamic, Color color)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Box2D Rec", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Box2D Rec", 0);
 	auto& pos = reg->get<Position>(entity);
 
 	auto& rigid = reg->emplace<Rigidbody2D>(entity, dynamic);
-	auto* body = rigid.Init(world, pos);
-	auto& box = reg->emplace<Rigidbody2DRectangle>(entity, Vector2(halfX, halfY));
+	b2BodyId body = rigid.Init(world, pos);
+	auto& box = reg->emplace<Rigidbody2DRectangle>(entity, Vector2{ halfX, halfY });
 	box.Init(body);
 
-	reg->emplace<RectangleComp>(entity, Vector2(halfX, halfY), color);// , boxColor);
+	reg->emplace<RectangleComp>(entity, Vector2{ halfX, halfY }, color);// , boxColor);
 	reg->emplace<Renderable>(entity);
 	return entity;
 }
 
-entt::entity Prefabs::CreateBox2dCircle(entt::registry* reg, b2World& world, float x, float y, float radious, Rigidbody2D::RigidbodyType dynamic, Color color)
+entt::entity Prefabs::CreateBox2dCircle(entt::registry* reg, b2WorldId world, float x, float y, float radious, Rigidbody2D::RigidbodyType dynamic, Color color)
 {
-	auto entity = CreateBasicEntity(reg, Vector2(x, y), Vector2(0.f, 0.f), 0.f, "Box2D Circle", 0);
+	auto entity = CreateBasicEntity(reg, Vector2{ x, y }, Vector2{ 0.f, 0.f }, 0.f, "Box2D Circle", 0);
 	auto& pos = reg->get<Position>(entity);
 
 	auto& rigid = reg->emplace<Rigidbody2D>(entity, dynamic);
-	auto* body = rigid.Init(world, pos);
+	b2BodyId body = rigid.Init(world, pos);
 	auto& box = reg->emplace<Rigidbody2DCircle>(entity, radious);
 	box.Init(body);
 

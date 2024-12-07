@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.28)
 include(FetchContent)
 include(ExternalProject)
 
-
 find_package(box2d)
 # find_package(collishi)
 find_package(enet)
@@ -35,10 +34,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # include_directories(${rlimgui_INCLUDE_DIR})
 # link_directories(${rlimgui_LIB_DIR})
 file(GLOB SOURCE_FILES "*.cpp")
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} "enetTest.cpp")
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-if(CMAKE_SYSTEM_NAME MATCHES "Windoes")
-    target_link_libraries(${PROJECT_NAME} winmm.lib)    
+if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    target_link_libraries(${PROJECT_NAME} winmm.lib)
 ENDIF()
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${enet_SOURCE_DIR}/include" "${rapidjson_SOURCE_DIR}/include" ${rlimgui_INCLUDE_DIR} "${rlimgui_INCLUDE_DIR}/imgui-master" ${collishi_INCLUDE_DIR} ${cute_headers_INCLUDE_DIR} ${physac_INCLUDE_DIR})

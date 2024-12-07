@@ -144,8 +144,8 @@ struct Rigidbody2D
 		// this could be handy
 		// bodyDef.userData.pointer = uintptr_t(this);
 
-		bodyDef.position = (b2Vec2){position.position.x, position.position.y};
-		bodyDef.rotation = (b2Rot){position.rotation};
+		bodyDef.position = b2Vec2{position.position.x, position.position.y};
+		bodyDef.rotation = b2MakeRot(position.rotation);
 		bodyDef.fixedRotation = fixedRotation;
 		bodyDef.isBullet = isBullet;
 
@@ -219,7 +219,7 @@ class Rigidbody2DCircle
 {
 public:
 	float radius = 0.5f;
-	Vector2 offset{0.f, 0.f};
+	Vector2 offset{ 0.f, 0.f };
 
 	float density = 1.0f;
 	float friction = 0.1f;
@@ -242,7 +242,6 @@ public:
 		shapeDef.restitution = restitution;
 
 		b2ShapeId shapeId = b2CreateCircleShape(bodyId, &shapeDef, &circle);
-	{
 		// b2CircleShape circle;
 		// circle.m_radius = radius;
 

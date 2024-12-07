@@ -2,7 +2,7 @@
 
 #include "ImguiEntityEditor.h"
 #include "Components.h"
-#include "rlimgui/rlImGuiColors.h"
+#include <rlImGuiColors.h>
 #include "ScriptRegistry.h"
 
 void DragFloatVector2(std::string label, Vector2& vec, float amount = 0.25f)
@@ -127,7 +127,6 @@ void CustomComponentWidget<ScriptComp>(entt::registry* reg, ScriptComp* comp)
 
 				if (comp->DestroyScript != nullptr)
 					comp->DestroyScript(comp);
-
 				auto e = entt::to_entity(*reg, *comp);
 
 				reg->remove<ScriptComp>(e);

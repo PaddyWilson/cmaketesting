@@ -2,9 +2,11 @@
 
 #include <iostream>
 #include <thread>
+#include <tchar.h>
 
-// #include <Windows.h>
-// #pragma comment(lib, "urlmon.lib")
+#include <Windows.h>
+#include <Urlmon.h>
+#pragma comment(lib, "urlmon.lib")
 
 using namespace std;
 
@@ -19,7 +21,7 @@ int Downloader::Download(std::string URL, std::string saveName)
 	const wchar_t* dFile = temp_saveName.c_str(); // L"image.png";
 
 	//this only works on windows
-	if (S_OK == URLDownloadToFile(NULL, sURL, dFile, 0, NULL))
+	if (S_OK == URLDownloadToFile(NULL, URL.c_str(), saveName.c_str(), 0, NULL))
 	{
 		cout << "The file is saved to " << saveName << endl;
 		return 0;

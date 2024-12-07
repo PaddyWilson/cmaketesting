@@ -28,7 +28,7 @@ public:
 
 	BaseScene() {
 		b2WorldDef worldDef = b2DefaultWorldDef();
-		worldDef.gravity = (b2Vec2){0.0f, -10.0f};
+		worldDef.gravity = b2Vec2{0.0f, -10.0f};
 		worldId = b2CreateWorld(&worldDef);
 		world = &worldDef;
 	};
@@ -58,7 +58,7 @@ public:
 	void SetSystemManager(SystemManager* systemManager) { this->systemManager = systemManager; }
 	SystemManager* GetSystemManager() { return systemManager; }
 
-	b2WorldDef* GetWorld() { return world; }
+	b2WorldId GetWorld() { return worldId; }
 
 //private:
 //	vector<ImguiWindow*> imguiWindows;

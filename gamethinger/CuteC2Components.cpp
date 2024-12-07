@@ -29,7 +29,7 @@ void DrawMan(c2Manifold& m)
 BB_AABB::BB_AABB(float x, float y, float hx, float hy, Color color) {
 	type = C2_TYPE_AABB;
 
-	halfSize = Vector2(hx, hy);
+	halfSize = Vector2{ hx, hy };
 
 	aabb.min.x = x - halfSize.x;
 	aabb.min.y = y - halfSize.y;
@@ -70,7 +70,7 @@ void BB_AABB::Move(Vector2 position, Vector2 offset, float rotation)
 
 Vector2 BB_AABB::GetPostion()
 {
-	return Vector2(aabb.min.x + halfSize.x, aabb.min.y + halfSize.y);
+	return Vector2{ aabb.min.x + halfSize.x, aabb.min.y + halfSize.y };
 }
 
 void BB_AABB::DebugDraw() {
@@ -105,7 +105,7 @@ void BB_CIRCLE::Move(Vector2 position, Vector2 offset, float rotation)
 
 Vector2 BB_CIRCLE::GetPostion()
 {
-	return Vector2(circle.p.x, circle.p.y);
+	return Vector2{ circle.p.x, circle.p.y };
 }
 
 void BB_CIRCLE::DebugDraw() {

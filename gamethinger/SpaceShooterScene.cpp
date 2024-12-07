@@ -2,6 +2,7 @@
 
 #include "PreFabs.h"
 #include "Vector2Math.h"
+#include <raymath.h>
 
 #include "ScriptRegistry.h"
 
@@ -83,7 +84,7 @@ void SpaceShooterScene::Init()
 	ScriptRegistry::AddScriptToEntity("MeteorController", registry, entity);
 
 }
-#include <rlimgui/imgui.h>
+#include <imgui.h>
 void SpaceShooterScene::Update(float deltaTime)
 {
 	Vector2 mouse = GetMousePosition() / 10;

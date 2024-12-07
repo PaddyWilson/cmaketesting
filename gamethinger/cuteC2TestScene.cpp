@@ -7,10 +7,12 @@
 
 #include "CuteC2System.h"
 
-#include <rlimgui/rlImGui.h>
+#include <rlImGui.h>
+#include <imgui.h>
 #include "ScriptRegistry.h"
 
 #include "TestScripts.h"
+#include <raymath.h>
 
 void Cute_c2TestScene::Init()
 {

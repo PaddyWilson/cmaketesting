@@ -12,7 +12,10 @@ public:
 		SceneName = "Box2d Testing";
 		gravity.x = 0.f;
 		gravity.y = 10.f;
-		world = new b2World(gravity);
+		b2WorldDef worldDef = b2DefaultWorldDef();
+		worldDef.gravity = b2Vec2{ 0.0f, -10.0f };
+		worldId = b2CreateWorld(&worldDef);
+		world = &worldDef;
 	}
 
 	void Init();

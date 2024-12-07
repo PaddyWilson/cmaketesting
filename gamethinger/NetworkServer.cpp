@@ -6,7 +6,7 @@
 //	#define ENET_IMPLEMENTATION
 //#endif // !#define ENET_IMPLEMENTATION
 
-#include "enet/enet.h"
+#include <enet.h>
 
 #include "NetworkHelpers.h"
 

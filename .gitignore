@@ -3,6 +3,7 @@ build/
 */build/*
 premake/Makefile
 .vs
+.vscode/*
 *.sln
 external/*
 !external/CMakeLists.txt

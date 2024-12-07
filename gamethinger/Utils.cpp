@@ -1,6 +1,8 @@
 #include "Utils.h"
 
-#include <NativeFileDialog/nfd.h>
+#include <nfd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void StringReplace(std::string* in, std::string find, std::string replace)
 {
@@ -12,8 +14,24 @@ void StringReplace(std::string* in, std::string find, std::string replace)
 
 bool OpenFileDialog(std::string cwd, std::string& outPath)
 {
+	/*nfdchar_t* outPath = NULL;
+	nfdresult_t result = NFD_OpenDialogU8(&outPath, NULL, NULL, NULL);
+
+	if (result == NFD_OKAY) {
+		puts("Success!");
+		puts(outPath);
+		free(outPath);
+	}
+	else if (result == NFD_CANCEL) {
+		puts("User pressed cancel.");
+	}
+	else {
+		printf("Error: %s\n", NFD_GetError());
+	}*/
+
+
 	nfdchar_t* outP = NULL;
-	nfdresult_t result = NFD_OpenDialog(NULL, cwd.c_str(), &outP);
+	nfdresult_t result = NFD_OpenDialogU8(&outP, NULL, NULL, NULL);
 
 	if (result == NFD_OKAY) {
 		//puts("Success!");
@@ -37,7 +55,7 @@ bool OpenFileDialog(std::string cwd, std::string& outPath)
 bool SaveFileDialog(std::string cwd, std::string& outPath)
 {
 	nfdchar_t* outP = NULL;
-	nfdresult_t result = NFD_SaveDialog(NULL, cwd.c_str(), &outP);
+	nfdresult_t result = NFD_SaveDialogU8(&outP, NULL, NULL, cwd.c_str(), NULL);
 
 	if (result == NFD_OKAY) {
 		outPath = outP;

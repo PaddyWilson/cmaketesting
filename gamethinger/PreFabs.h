@@ -26,8 +26,8 @@ namespace Prefabs {
 	entt::entity CreateButton(entt::registry* reg, string text, float x, float y, float size, std::function<void()> func, Color boxColor, Color textColor = BLACK);
 	entt::entity CreateButtonUI(entt::registry* reg, string text, float x, float y, float size, std::function<void()> func, Color boxColor, Color textColor = BLACK);
 
-	entt::entity CreateBox2dRec(entt::registry* reg, b2World& world, float x, float y, float size_x, float size_y, Rigidbody2D::RigidbodyType dynamic, Color boxColor);
-	entt::entity CreateBox2dCircle(entt::registry* reg, b2World& world, float x, float y, float radious, Rigidbody2D::RigidbodyType dynamic, Color color);
+	entt::entity CreateBox2dRec(entt::registry* reg, b2WorldId world, float x, float y, float size_x, float size_y, Rigidbody2D::RigidbodyType dynamic, Color boxColor);
+	entt::entity CreateBox2dCircle(entt::registry* reg, b2WorldId world, float x, float y, float radious, Rigidbody2D::RigidbodyType dynamic, Color color);
 
 	entt::entity CreateLabel(entt::registry* reg, string text, float x, float y, float size, Color textColor);
 

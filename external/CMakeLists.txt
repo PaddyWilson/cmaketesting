@@ -6,18 +6,21 @@ FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
     GIT_TAG master
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 FetchContent_Declare(
     EnTT
     GIT_REPOSITORY https://github.com/skypjack/entt.git
-    GIT_TAG master
+    GIT_TAG v3.12.2
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 FetchContent_Declare(
     yaml-cpp
     GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
     GIT_TAG master
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 
@@ -73,8 +76,8 @@ set(RAPIDJSON_BUILD_THIRDPARTY_GTEST OFF CACHE BOOL "")
 FetchContent_Declare(
     rapidjson
     GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
-    #GIT_SHALLOW    TRUE
     #GIT_TAG        master
+    GIT_SHALLOW true
     #SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/rapidjson"
     #BINARY_DIR "${CMAKE_BINARY_DIR}/SDKs/rapidjson"
     OVERRIDE_FIND_PACKAGE
@@ -83,12 +86,14 @@ FetchContent_Declare(
 FetchContent_Declare(
     json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 
 FetchContent_Declare(
     enet
     GIT_REPOSITORY https://github.com/zpl-c/enet.git
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 
@@ -96,6 +101,7 @@ FetchContent_Declare(
     nfd
     GIT_REPOSITORY https://github.com/btzy/nativefiledialog-extended.git
     GIT_TAG master
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 
@@ -103,6 +109,7 @@ FetchContent_Declare(
     box2d
     GIT_REPOSITORY https://github.com/erincatto/box2d.git
     GIT_TAG main
+    GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 
@@ -110,6 +117,7 @@ ExternalProject_Add(
     collishiDownload
     GIT_REPOSITORY https://github.com/Shidacea/Collishi.git
     GIT_TAG master
+    GIT_SHALLOW true
     LOG_CONFIGURE true
     LOG_BUILD true
     #BUILD_IN_SOURCE 1
@@ -153,6 +161,7 @@ ExternalProject_Add(
     physacDownload
     GIT_REPOSITORY https://github.com/victorfisac/Physac.git
     GIT_TAG master
+    GIT_SHALLOW true
     LOG_CONFIGURE true
     LOG_BUILD true
     #BUILD_IN_SOURCE 1
@@ -173,6 +182,7 @@ FetchContent_Declare(
     curl
     URL https://curl.se/download/curl-8.11.0.tar.gz
     # GIT_TAG main
+    GIT_SHALLOW true
     DOWNLOAD_EXTRACT_TIMESTAMP true
     OVERRIDE_FIND_PACKAGE
 )

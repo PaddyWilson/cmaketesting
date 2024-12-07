@@ -1,7 +1,7 @@
 // GameThinger.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
 #define CUTE_C2_IMPLEMENTATION
-#include <cute_c2.h>
+//#include <cute_c2.h>
 
 //raylib flags
 //#define SUPPORT_DEFAULT_FONT (default)
@@ -14,6 +14,8 @@
 #define SUPPORT_GIF_RECORDING
 //#define SUPPORT_COMPRESSION_API
 #define SUPPORT_AUTOMATION_EVENTS
+
+#define NDEBUG
 
 //entt flags
 //for pointer stability
@@ -195,7 +197,7 @@ int main(void)
 		auto view = registry->view<Position, Rigidbody2D>();
 		for (auto [entity, position, rigidbody] : view.each()) {
 
-			auto* body = rigidbody.Init(*sceneManager.GetActiveScene()->GetWorld(), position);
+			auto body = rigidbody.Init(sceneManager.GetActiveScene()->GetWorld(), position);
 
 			auto rec = registry->try_get<Rigidbody2DRectangle>(entity);
 			if (rec)

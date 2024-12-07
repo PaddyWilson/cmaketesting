@@ -4,7 +4,9 @@
 #include <vector>
 #include <entt/entt.hpp>
 //phys
+#ifndef CUTE_C2_IMPLEMENTATION
 #define CUTE_C2_IMPLEMENTATION
+#endif
 #include <cute_c2.h>
 
 //use to scale cute_c2 positions to screen position;

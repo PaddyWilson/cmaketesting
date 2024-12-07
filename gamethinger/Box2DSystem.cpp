@@ -16,7 +16,7 @@ void Box2DSystem::Update(float deltaTime)
 	auto view = registry->view<Position, Rigidbody2D>();
 	for (auto [entity, position, rigidbody] : view.each()) {
 
-		if (rigidbody.bodyId == b2_nullBodyId)
+		if (B2_IS_NULL(rigidbody.bodyId))
 			continue;
 
 		auto rPos = b2Body_GetPosition(rigidbody.bodyId);// rigidbody.body->GetPosition();

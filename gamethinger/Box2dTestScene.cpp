@@ -1,7 +1,7 @@
 #include "Box2dTestScene.h"
 #include "Components.h"
-
-#include <raylib.h>
+//
+//#include <raylib.h>
 #include "PreFabs.h"
 #include "Vector2Math.h"
 #pragma warning( disable: 4244)
@@ -15,13 +15,13 @@ void Box2dTestScene::Init()
 		Vector2{ (float)Global::ScreenWidth / 2 , (float)Global::ScreenWidth / 2 },
 		Vector2{ (float)Global::ScreenWidth / 2 , (float)Global::ScreenWidth / 2 });
 
-	auto entity = Prefabs::CreateBox2dRec(registry, *world, 192 / 2, 100, 100, 1, Rigidbody2D::RigidbodyType::Static, PURPLE);
+	auto entity = Prefabs::CreateBox2dRec(registry, worldId, 192 / 2, 100, 100, 1, Rigidbody2D::RigidbodyType::Static, PURPLE);
 	//Prefabs::AddAABB(registry, entity, Vector2{ 100, 1 });
 
-	entity = Prefabs::CreateBox2dRec(registry, *world, 2, 50, 1, 50, Rigidbody2D::RigidbodyType::Static, PINK);
+	entity = Prefabs::CreateBox2dRec(registry, worldId, 2, 50, 1, 50, Rigidbody2D::RigidbodyType::Static, PINK);
 	//Prefabs::AddAABB(registry, entity, Vector2{ 1, 50 });
 
-	entity = Prefabs::CreateBox2dRec(registry, *world, 192, 100, 1, 25, Rigidbody2D::RigidbodyType::Static, GREEN);
+	entity = Prefabs::CreateBox2dRec(registry, worldId, 192, 100, 1, 25, Rigidbody2D::RigidbodyType::Static, GREEN);
 	//Prefabs::AddAABB(registry, entity, Vector2{ 1, 25 });
 
 	Rigidbody2D::RigidbodyType t = Rigidbody2D::RigidbodyType::Dynamic;
@@ -33,10 +33,10 @@ void Box2dTestScene::Init()
 	{
 		for (size_t j = 0; j < 5; j++)
 		{
-			entity = Prefabs::CreateBox2dRec(registry, *world, x, y, 1, 1, t, RED);
+			entity = Prefabs::CreateBox2dRec(registry, worldId, x, y, 1, 1, t, RED);
 			//Prefabs::AddAABB(registry, entity, Vector2{ 1, 1 });
 
-			entity = Prefabs::CreateBox2dCircle(registry, *world, x + 2, y, 1, t, BLUE);
+			entity = Prefabs::CreateBox2dCircle(registry, worldId, x + 2, y, 1, t, BLUE);
 			//Prefabs::AddCircle(registry, entity, 1);
 			x += 4;
 		}
@@ -48,7 +48,8 @@ void Box2dTestScene::Init()
 void Box2dTestScene::Update(float deltaTime)
 {
 	//simulate world
-	world->Step(deltaTime, velocityIterations, positionIterations);
+	b2World_Step(worldId, deltaTime, velocityIterations);
+	//world->Step(deltaTime, velocityIterations, positionIterations);
 	systemManager->Update(deltaTime);
 }
 

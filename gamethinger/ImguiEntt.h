@@ -7,7 +7,7 @@
 #include <string>
 
 #include <entt/entt.hpp>
-#include <rlimgui/imgui.h>
+#include <imgui.h>
 
 #include "ImguiWindow.h"
 

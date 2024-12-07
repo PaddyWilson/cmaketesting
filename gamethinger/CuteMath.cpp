@@ -8,7 +8,7 @@ c2v operator+(const c2v v1, const c2v v2)
 
 c2v operator+(const c2v vec, float val)
 {
-	return c2v(vec.x + val, vec.y + val);
+	return c2v{ vec.x + val, vec.y + val };
 }
 
 c2v& operator+=(c2v& v1, c2v v2) {
@@ -30,7 +30,7 @@ c2v operator-(const c2v v1, const c2v v2)
 
 c2v operator-(const c2v vec, float val)
 {
-	return c2v(vec.x - val, vec.y - val);
+	return c2v{ vec.x - val, vec.y - val };
 }
 
 c2v& operator-=(c2v& v1, c2v v2)
@@ -54,7 +54,7 @@ c2v operator*(const c2v v1, const c2v v2)
 
 c2v operator*(const c2v vec, float val)
 {
-	return c2v(vec.x * val, vec.y * val);
+	return c2v{ vec.x * val, vec.y * val };
 }
 
 c2v& operator*=(c2v& v1, c2v v2)
@@ -72,7 +72,7 @@ c2v& operator*=(c2v& v1, float v2)
 //div
 c2v operator/(const c2v v1, const c2v v2)
 {
-	return c2v(v1.x * v2.x, v1.y * v2.y);
+	return c2v{v1.x * v2.x, v1.y * v2.y};
 }
 
 c2v operator/(const c2v vec, float val)
@@ -94,16 +94,16 @@ c2v& operator/=(c2v& v1, float v2)
 
 inline c2v floor(c2v vec)
 {
-	return c2v(floor(vec.x), floor(vec.y));
+	return c2v{(float)floor(vec.x), (float)floor(vec.y)};
 }
 
 inline c2v CToV(const Vector2 vec)
 {
-	return c2v(vec.x, vec.y);
+	return c2v{vec.x, vec.y};
 }
 
 inline Vector2 VToC(const c2v vec)
 {
-	return Vector2(vec.x, vec.y);
+	return Vector2{vec.x, vec.y};
 }
 
