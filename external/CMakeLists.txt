@@ -27,10 +27,23 @@ FetchContent_Declare(
 #     GIT_TAG        main
 # )
 # FetchContent_MakeAvailable(rlimgui)
+
+if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    set (rlPATCH_COMMAND "")
+    set (rlCONFIGURE_COMMAND premake5.exe vs2022)
+    set (rlBUILD_COMMAND premake5.exe vs2022)
+elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    set (rlPATCH_COMMAND chmod +x premake5)
+    set (rlCONFIGURE_COMMAND ./premake5 gmake2)
+    set (rlBUILD_COMMAND make)
+ENDIF()
+
 ExternalProject_Add(
     rlimguiDownload
     GIT_REPOSITORY https://github.com/raylib-extras/rlImGui.git
     GIT_TAG main
+    GIT_SHALLOW true
+    
     LOG_CONFIGURE true
     LOG_BUILD true
     #BUILD_IN_SOURCE 1
@@ -42,17 +55,13 @@ ExternalProject_Add(
     #STAMP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui
     INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/Debug
 
-    PATCH_COMMAND chmod +x premake5
-    CONFIGURE_COMMAND ./premake5 gmake2
-    BUILD_COMMAND make
+    PATCH_COMMAND ${rlPATCH_COMMAND}
+    CONFIGURE_COMMAND ${rlCONFIGURE_COMMAND}
+    BUILD_COMMAND ${rlBUILD_COMMAND}
     INSTALL_COMMAND ""
 )
 SET(rlimgui_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui CACHE INTERNAL "")
-# if(Debug)
 SET(rlimgui_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/Debug CACHE INTERNAL "")
-# else()
-# SET(rlimgui_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/Release CACHE INTERNAL "")
-# endif()
 
 # add_library(rlimgui STATIC IMPORTED)
 # set_target_properties(rlimgui PROPERTIES IMPORTED_LOCATION ${rlimgui_LIB_DIR}/librlImGui.a)
@@ -122,6 +131,8 @@ ExternalProject_Add(
     cute_headersDownload
     GIT_REPOSITORY https://github.com/RandyGaul/cute_headers.git
     GIT_TAG master
+    GIT_SHALLOW true
+
     LOG_CONFIGURE true
     LOG_BUILD true
     #BUILD_IN_SOURCE 1
@@ -156,6 +167,8 @@ ExternalProject_Add(
 
 SET(physac_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/physac/src/physac/src CACHE INTERNAL "")
 
+
+set(CURL_ENABLE_SSL on CACHE BOOL "")
 FetchContent_Declare(
     curl
     URL https://curl.se/download/curl-8.11.0.tar.gz
