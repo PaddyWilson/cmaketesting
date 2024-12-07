@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.28)
 include(FetchContent)
 include(ExternalProject)
 
-
 find_package(box2d)
 # find_package(collishi)
 find_package(enet)
@@ -38,7 +37,7 @@ file(GLOB SOURCE_FILES "*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    #target_compile_options(${PROJECT_NAME} PUBLIC "/FORCE:MULTIPLE")
+    target_compile_options(${PROJECT_NAME} PUBLIC "/MP")
     target_link_options(${PROJECT_NAME} PUBLIC "/FORCE")
 ENDIF()
 
