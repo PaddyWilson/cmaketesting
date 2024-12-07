@@ -2,18 +2,20 @@
 
 std::map<std::string, Texture2D> TextureManager::textures;
 
-concurrency::concurrent_queue<TextureManager::LoadData> TextureManager::loadQueue;
+// concurrency::concurrent_queue<TextureManager::LoadData> TextureManager::loadQueue;
+std::queue<TextureManager::LoadData> TextureManager::loadQueue;
 std::thread TextureManager::singleThread;
 std::thread TextureManager::listThread;
 
-void TextureManager::Init() {
+void TextureManager::Init()
+{
 	Load(Global::BasePath + Global::DefaultTextureName, Global::DefaultTextureName);
 }
 
 void TextureManager::End()
 {
-	//unload all textures
-	for (auto const& tex : textures)
+	// unload all textures
+	for (auto const &tex : textures)
 		UnloadTexture(tex.second);
 
 	if (singleThread.joinable())
@@ -29,7 +31,7 @@ int TextureManager::Load(std::string path, std::string alias)
 	textures[alias] = LoadTexture(path.c_str());
 	SetTextureFilter(textures[alias], TEXTURE_FILTER_ANISOTROPIC_16X);
 
-	//GenTextureMipmaps(&textures[alias]);
+	// GenTextureMipmaps(&textures[alias]);
 
 	return 0;
 }
@@ -45,7 +47,7 @@ void TextureManager::Load(std::vector<std::string> paths, std::vector<std::strin
 
 void TextureManager::Unload(std::string alias)
 {
-	//can't find texture
+	// can't find texture
 	if (textures.find(alias) == textures.end())
 		return;
 
@@ -54,22 +56,23 @@ void TextureManager::Unload(std::string alias)
 
 Texture2D TextureManager::GetTexture(std::string alias)
 {
-	//can't find texture
+	// can't find texture
 	if (textures.find(alias) == textures.end())
 		return textures[Global::DefaultTextureName];
-	//found texture
+	// found texture
 	return textures[alias];
 }
-
 
 void TextureManager::Update()
 {
 	if (loadQueue.empty())
 		return;
 
-	LoadData data;
-	if (!loadQueue.try_pop(data))
-		return;
+	LoadData data = loadQueue.front();
+	loadQueue.pop();
+
+	// if (!loadQueue.try_pop(data))
+	// 	return;
 
 	textures[data.alias] = LoadTextureFromImage(data.image);
 	SetTextureFilter(textures[data.alias], TEXTURE_FILTER_ANISOTROPIC_16X);
@@ -79,16 +82,15 @@ void TextureManager::Update()
 void TextureManager::LoadAsync(std::string path, std::string alias)
 {
 	singleThread = std::thread(LoadAsyncMain, path, alias);
-	//you can detach now or wait for join before distorying thread
+	// you can detach now or wait for join before distorying thread
 	singleThread.detach();
 }
 
 void TextureManager::LoadAsync(std::vector<std::string> paths, std::vector<std::string> alias)
 {
-	listThread =  std::thread(LoadListAsyncMain, paths, alias);
+	listThread = std::thread(LoadListAsyncMain, paths, alias);
 	listThread.detach();
 }
-
 
 void TextureManager::LoadAsyncMain(std::string path, std::string alias)
 {
@@ -96,7 +98,7 @@ void TextureManager::LoadAsyncMain(std::string path, std::string alias)
 	data.alias = alias;
 	data.image = LoadImage(path.c_str());
 
-	//ImageResize(&data.image, data.image.width / 2, data.image.height / 2);
+	// ImageResize(&data.image, data.image.width / 2, data.image.height / 2);
 
 	loadQueue.push(data);
 }
@@ -109,6 +111,5 @@ void TextureManager::LoadListAsyncMain(std::vector<std::string> paths, std::vect
 		data.alias = alias[i];
 		data.image = LoadImage(paths[i].c_str());
 		loadQueue.push(data);
-	}	
+	}
 }
-

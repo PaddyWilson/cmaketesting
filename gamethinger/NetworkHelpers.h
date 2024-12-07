@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+#include <math.h>
 #include <string>
 
 void PackByte(uint8_t* buffer, size_t* offset, uint8_t data);

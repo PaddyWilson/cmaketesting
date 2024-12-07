@@ -3,6 +3,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <queue>
+#include <functional>
 //#include <deque>
 #include <future>
 //#include <windows.h>//for sleep on windows

@@ -2,16 +2,38 @@
 
 #include <iostream>
 #include <thread>
-#include <tchar.h>
 
+#ifdef __unix__ 
+#include <cstdlib>
+#include <iostream>
+#elif defined(_WIN32) || defined(WIN32) 
+#include <tchar.h>
 #include <Windows.h>
 #include <Urlmon.h>
 #pragma comment(lib, "urlmon.lib")
+#endif
 
 using namespace std;
 
 int Downloader::Download(std::string URL, std::string saveName)
 {
+#ifdef __unix__ 
+	std::string command = "wget -O "+ saveName + " " + URL;
+
+	// giving system command and storing return value
+    int returnCode = system(command.c_str());
+
+    // checking if the command was executed successfully
+    if (returnCode == 0) {
+        cout << "Command executed successfully." << endl;
+    }
+    else {
+        cout << "Command execution failed or returned "
+                "non-zero: "
+             << returnCode << endl;
+    }
+#elif defined(_WIN32) || defined(WIN32) 
+
 	std::wstring temp_url = std::wstring(URL.begin(), URL.end());
 	std::wstring temp_saveName = std::wstring(saveName.begin(), saveName.end());
 
@@ -31,6 +53,7 @@ int Downloader::Download(std::string URL, std::string saveName)
 		cout << "Unable to Download the file." << endl;
 		return -1;
 	}
+#endif
 }
 
 int Downloader::DownloadList(std::vector<std::string> URL, std::vector<std::string> saveName)

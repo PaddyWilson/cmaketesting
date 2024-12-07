@@ -1,7 +1,5 @@
 #include "ImguiEntityEditor.h"
-
 #include "Components.h"
-
 #include "PreFabs.h"
 
 bool IsEntityLower(entt::registry* reg, entt::entity find, entt::entity search)

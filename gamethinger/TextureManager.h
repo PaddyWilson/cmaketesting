@@ -1,7 +1,8 @@
 #pragma once
 #include <map>
 #include <vector>
-#include <concurrent_queue.h>
+//#include <concurrent_queue.h>
+#include <queue>
 #include <string>
 #include <iostream>
 #include <raylib.h>
@@ -23,7 +24,8 @@ private:
 	};
 
 	//a queue to load data from when update is called
-	static concurrency::concurrent_queue<LoadData> loadQueue;
+	//static concurrency::concurrent_queue<LoadData> loadQueue;
+	static std::queue<LoadData> loadQueue;
 	static std::thread singleThread;
 	static std::thread listThread;
 

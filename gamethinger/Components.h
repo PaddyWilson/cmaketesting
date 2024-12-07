@@ -161,6 +161,7 @@ struct Rigidbody2D
 			return "Dynamic";
 		else if (type == Rigidbody2D::RigidbodyType::Kinematic)
 			return "Kinematic";
+		return "Static";
 	}
 
 	static RigidbodyType StringToType(const std::string &type)
@@ -171,6 +172,7 @@ struct Rigidbody2D
 			return Rigidbody2D::RigidbodyType::Dynamic;
 		else if (type == "Kinematic")
 			return Rigidbody2D::RigidbodyType::Kinematic;
+		return Rigidbody2D::RigidbodyType::Static;
 	}
 };
 

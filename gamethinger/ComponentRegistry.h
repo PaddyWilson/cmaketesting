@@ -5,7 +5,7 @@
 
 #include "EventManager.h"
 
-//template<typename T>
+template<typename T>
 class ComponentRegistryAdd 
 {
 public:
@@ -15,7 +15,7 @@ public:
 	//std::function<void(A...)> widgetDisplay;
 };
 
-static class ComponentRegistry
+class ComponentRegistry
 {
 private:
 	//std::unordered_map<entt::id_type, RegistryData> compsRegistry;
@@ -41,7 +41,7 @@ public:
 		constexpr entt::id_type index = entt::type_hash<T>::value();
 
 		//set functions to trysave / tryload
-		ComponentRegistryAdd data;
+		ComponentRegistryAdd<T> data;
 		data.priority = priority;
 		data.compName = compName;
 		data.compType = index;
@@ -49,6 +49,6 @@ public:
 		//compsRegistry.insert_or_assign(index, data);
 
 		EventManager::TriggerEvent<ComponentRegistryAdd<T>>(data);
-	}
+	};
 };
 

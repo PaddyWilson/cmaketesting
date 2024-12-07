@@ -19,7 +19,7 @@ void EditString(std::string label, std::string& editString)
 {
 	char buffer[256];
 	memset(buffer, 0, sizeof(buffer));
-	strncpy_s(buffer, sizeof(buffer), editString.c_str(), sizeof(buffer));
+	strncpy(buffer, editString.c_str(), sizeof(buffer));
 	if (ImGui::InputText(label.c_str(), buffer, sizeof(buffer)))
 	{
 		editString = std::string(buffer);

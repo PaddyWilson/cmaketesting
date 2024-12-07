@@ -1,6 +1,7 @@
 #pragma once
 #include "ImguiWindow.h"
 
+#include <stdint.h>
 #include <entt/entt.hpp>
 
 template<typename T>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "cute_c2.h"
+#include <cute_c2.h>
 #include "raymath.h"
 
 //add

@@ -6,7 +6,7 @@
 #include <string>
 #include <entt/entt.hpp>
 
-#define YAML_CPP_STATIC_DEFINE
+// #define YAML_CPP_STATIC_DEFINE
 #include <yaml-cpp/yaml.h>
 
 //forward declair BaseScene

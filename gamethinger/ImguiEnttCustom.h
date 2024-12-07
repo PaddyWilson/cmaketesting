@@ -1,6 +1,6 @@
 #pragma once
 #include "ImguiEntt.h"
-
+#include <string.h>
 //Used to display values in ImguiEntt editor
 namespace MM {
 	template <>
@@ -30,7 +30,7 @@ namespace MM {
 
 		char buffer[256];
 		memset(buffer, 0, sizeof(buffer));
-		strncpy_s(buffer, sizeof(buffer), v.text.c_str(), sizeof(buffer));
+		strncpy(buffer, v.text.c_str(), sizeof(buffer));
 		if (ImGui::InputText("##Tag", buffer, sizeof(buffer)))
 		{
 			v.text = std::string(buffer);

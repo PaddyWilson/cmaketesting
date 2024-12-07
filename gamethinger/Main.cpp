@@ -1,7 +1,8 @@
 // GameThinger.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
+//cute_header flags
 #define CUTE_C2_IMPLEMENTATION
-//#include <cute_c2.h>
+// #include <cute_c2.h>
 
 //raylib flags
 //#define SUPPORT_DEFAULT_FONT (default)
@@ -15,7 +16,10 @@
 //#define SUPPORT_COMPRESSION_API
 #define SUPPORT_AUTOMATION_EVENTS
 
-#define NDEBUG
+// #define NDEBUG
+
+#define PHYSAC_IMPLEMENTATION
+#define PHYSAC_NO_THREADS
 
 //entt flags
 //for pointer stability
@@ -26,7 +30,7 @@
 #include <fstream>
 #include <raylib.h>
 
-#include <imgui-master/imgui.h>
+#include <imgui.h>
 #include <rlImGui.h>
 #include <rlImGuiColors.h>
 #include <entt/entt.hpp>

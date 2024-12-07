@@ -39,13 +39,15 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     target_compile_options(${PROJECT_NAME} PUBLIC "/MP")
     target_link_options(${PROJECT_NAME} PUBLIC "/FORCE")
+elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
+    target_compile_options(${PROJECT_NAME} PUBLIC "-fpermissive")
+    # target_link_options(${PROJECT_NAME} PUBLIC "/FORCE")
 ENDIF()
 
 target_include_directories(${PROJECT_NAME} PUBLIC "${enet_SOURCE_DIR}/include" "${rapidjson_SOURCE_DIR}/include" ${rlimgui_INCLUDE_DIR} "${rlimgui_INCLUDE_DIR}/imgui-master" ${collishi_INCLUDE_DIR} ${cute_headers_INCLUDE_DIR} ${physac_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} raylib yaml-cpp nfd EnTT::EnTT nlohmann_json::nlohmann_json box2d rlimgui)# CURL::libcurl)# ${rlimgui_LIBRARY})
-
+target_link_libraries(${PROJECT_NAME} raylib yaml-cpp nfd EnTT::EnTT nlohmann_json::nlohmann_json box2d rlimgui) # CURL::libcurl)# ${rlimgui_LIBRARY})
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     target_link_libraries(${PROJECT_NAME} winmm.lib urlmon.lib comctl32.lib)
 ENDIF()
 
-add_dependencies(${PROJECT_NAME} rlimguiDownload collishiDownload cute_headersDownload physacDownload)#used so rlimgui will be built before linking
+add_dependencies(${PROJECT_NAME} rlimguiDownload collishiDownload cute_headersDownload physacDownload) #used so rlimgui will be built before linking
