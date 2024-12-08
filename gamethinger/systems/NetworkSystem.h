@@ -1,7 +1,7 @@
 #pragma once
-#include "BaseSystem.h"
+#include "../BaseSystem.h"
 
-#include "network/NetworkBase.h"
+#include "../network/NetworkBase.h"
 
 class NetworkSystem : public BaseSystem
 {

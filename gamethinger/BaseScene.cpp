@@ -2,8 +2,8 @@
 
 void BaseScene::ClearScene()
 {
-    delete world;
-
+    //delete world;
+    b2DestroyWorld(worldId);
     b2WorldDef worldDef = b2DefaultWorldDef();
     worldDef.gravity = b2Vec2{0.0f, -10.0f};
     worldId = b2CreateWorld(&worldDef);

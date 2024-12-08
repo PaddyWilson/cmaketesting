@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseSystem.h"
+#include "../BaseSystem.h"
 class DestroySystem : public BaseSystem
 {
 public:

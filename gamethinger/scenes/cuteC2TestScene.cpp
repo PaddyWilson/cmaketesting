@@ -5,7 +5,7 @@
 #include "../Vector2Math.h"
 #include "../CuteC2Components.h"
 
-#include "../CuteC2System.h"
+#include "../systems/CuteC2System.h"
 
 #include <rlImGui.h>
 #include <imgui.h>

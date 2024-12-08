@@ -1,6 +1,6 @@
 #include "DestroySystem.h"
 
-#include "Components.h"
+#include "../Components.h"
 
 void DestroySystem::Update(float deltaTime)
 {

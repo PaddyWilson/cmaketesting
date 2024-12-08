@@ -1,6 +1,6 @@
 #include "ScriptSystem.h"
 
-#include "Components.h"
+#include "../Components.h"
 
 void ScriptSystem::Init()
 {

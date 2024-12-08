@@ -1,8 +1,8 @@
 #include "ParentChildSystem.h"
 
-#include "EventManager.h"
-#include "Events.h"
-#include "Components.h"
+#include "../EventManager.h"
+#include "../Events.h"
+#include "../Components.h"
 
 void ParentChildSystem::Init()
 {

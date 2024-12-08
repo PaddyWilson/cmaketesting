@@ -2,10 +2,10 @@
 #include <raylib.h>
 #include <entt/entt.hpp>
 
-#include "TextureManager.h"
-#include "BaseSystem.h"
-#include "Components.h"
-#include "Vector2Math.h"
+#include "../TextureManager.h"
+#include "../BaseSystem.h"
+#include "../Components.h"
+#include "../Vector2Math.h"
 
 class RenderSystem :public BaseSystem
 {
