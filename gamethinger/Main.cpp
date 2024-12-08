@@ -47,8 +47,8 @@
 #include "ScenesHeader.h"
 
 //imgui
-#include "ImguiHeader.h"
-#include "ImguiEntityEditorCustom.h"
+#include "imgui/ImguiHeader.h"
+#include "imgui/ImguiEntityEditorCustom.h"
 
 #include "EventManager.h"
 

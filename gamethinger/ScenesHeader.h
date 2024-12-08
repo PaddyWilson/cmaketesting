@@ -4,9 +4,9 @@
 
 #include "BlankScene.h"
 
-#include "Box2dTestScene.h"
-#include "SpaceShooterScene.h"
-#include "TestScene.h"
-#include "NetworkTestingScene.h"
-#include "MTGGameScene.h"
-#include "cuteC2TestScene.h"
+#include "scenes/Box2dTestScene.h"
+#include "scenes/SpaceShooterScene.h"
+#include "scenes/TestScene.h"
+#include "scenes/NetworkTestingScene.h"
+#include "mtg/MTGGameScene.h"
+#include "scenes/cuteC2TestScene.h"
