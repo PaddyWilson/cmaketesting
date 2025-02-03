@@ -3,7 +3,7 @@
 #include "ImguiEntityEditor.h"
 #include "../Components.h"
 #include <rlImGuiColors.h>
-#include "ScriptRegistry.h"
+#include "../ScriptRegistry.h"
 
 void DragFloatVector2(std::string label, Vector2& vec, float amount = 0.25f)
 {

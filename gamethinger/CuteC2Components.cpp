@@ -1,6 +1,5 @@
 #include "CuteC2Components.h"
 
-#include "Vector2Math.h"
 #include "CuteMath.h"
 
 void DrawRaycast(c2v impact, c2v end)

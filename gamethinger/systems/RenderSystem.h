@@ -5,7 +5,6 @@
 #include "../TextureManager.h"
 #include "../BaseSystem.h"
 #include "../Components.h"
-#include "../Vector2Math.h"
 
 class RenderSystem :public BaseSystem
 {

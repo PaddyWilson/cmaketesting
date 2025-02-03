@@ -35,6 +35,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # link_directories(${rlimgui_LIB_DIR})
 file(GLOB_RECURSE SOURCE_FILES "*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+# add_library(${PROJECT_NAME}lib STATIC ${SOURCE_FILES})
 
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     target_compile_options(${PROJECT_NAME} PUBLIC "/MP")

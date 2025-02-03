@@ -1,6 +1,5 @@
 #include "ClickableSystem.h"
 
-#include "../Vector2Math.h"
 #include <raymath.h>
 
 void ClickableSystem::Update(float deltaTime)

@@ -4,7 +4,7 @@
 #include <entt/entt.hpp>
 #include <box2d/box2d.h>
 
-#include "Utils/UUIDGen.h"
+#include "utils/UUIDGen.h"
 
 #include "Script.h"
 

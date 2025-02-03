@@ -62,7 +62,7 @@
 
 using namespace std;
 
-SystemManager* AddSystem(SystemManager* systemManager) {
+SystemManager* AddSystemsToScene(SystemManager* systemManager) {
 	//create systems
 	systemManager->AddSystem(new DestroySystem());
 	systemManager->AddSystem(new InputSystem());
@@ -113,25 +113,25 @@ int main(void)
 	//create ecs
 	SceneManager sceneManager;
 	sceneManager.AddScene(new BlankScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 	sceneManager.AddScene(new TestScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 	sceneManager.AddScene(new NetworkTestingScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 	sceneManager.AddScene(new MTGGameScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 	sceneManager.AddScene(new Box2dTestScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 	sceneManager.AddScene(new Cute_c2TestScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 	sceneManager.AddScene(new SpaceShooterScene());
-	AddSystem(sceneManager.GetActiveScene()->GetSystemManager());
+	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
 	sceneManager.GetActiveScene()->Init();
 
 	/*Image largeimage = GenImageColor(MAX_TEXTURE_SIZE, MAX_TEXTURE_SIZE, GREEN);

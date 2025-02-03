@@ -2,7 +2,6 @@
 
 #include "../PreFabs.h"
 
-#include "../Vector2Math.h"
 #include "../CuteC2Components.h"
 
 #include "../systems/CuteC2System.h"

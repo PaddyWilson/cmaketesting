@@ -3,7 +3,6 @@
 //
 //#include <raylib.h>
 #include "../PreFabs.h"
-#include "../Vector2Math.h"
 #pragma warning( disable: 4244)
 
 void Box2dTestScene::Init()
@@ -29,7 +28,7 @@ void Box2dTestScene::Init()
 	int yR = 40;
 	int x = xR;
 	int y = yR;
-	for (size_t i = 0; i < 100; i++)
+	for (size_t i = 0; i < 500; i++)
 	{
 		for (size_t j = 0; j < 5; j++)
 		{

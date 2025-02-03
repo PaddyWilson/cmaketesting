@@ -1,7 +1,6 @@
 #include "SpaceShooterScene.h"
 
 #include "../PreFabs.h"
-#include "../Vector2Math.h"
 #include <raymath.h>
 
 #include "../ScriptRegistry.h"

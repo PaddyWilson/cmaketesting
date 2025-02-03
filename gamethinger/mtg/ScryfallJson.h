@@ -11,8 +11,8 @@
 #include "../Global.h"
 #include "MTGComps.h"
 
-#include "../Utils/Downloader.h"
-#include "../Utils/Utils.h"
+#include "../utils/Downloader.h"
+#include "../utils/Utils.h"
 #include "../TextureManager.h"
 
 using namespace rapidjson;

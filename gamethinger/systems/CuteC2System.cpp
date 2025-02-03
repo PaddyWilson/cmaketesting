@@ -1,6 +1,5 @@
 #include "CuteC2System.h"
 
-#include "../Vector2Math.h"
 #include "../EventManager.h"
 
 #include "../CuteMath.h"
