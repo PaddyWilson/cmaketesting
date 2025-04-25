@@ -7,3 +7,4 @@ premake/Makefile
 *.sln
 external/*
 !external/CMakeLists.txt
+/CMakeFiles

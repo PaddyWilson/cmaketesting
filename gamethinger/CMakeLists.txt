@@ -58,7 +58,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC ${rapidjson_SOURCE_DIR}/includ
 # target_link_libraries(${PROJECT_NAME} PRIVATE RapidJSON)
 target_link_libraries(${PROJECT_NAME} PUBLIC raylib yaml-cpp enet::enet_static nfd EnTT::EnTT nlohmann_json::nlohmann_json box2d rlimgui CURL::libcurl_static)# ${rlimgui_LIBRARY})
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
-    target_link_libraries(${PROJECT_NAME} winmm.lib urlmon.lib comctl32.lib)
+    target_link_libraries(${PROJECT_NAME} PRIVATE winmm.lib urlmon.lib comctl32.lib)
 ENDIF()
 
 add_dependencies(${PROJECT_NAME} rlimguiDownload collishiDownload cute_headersDownload physacDownload) #used so rlimgui will be built before linking

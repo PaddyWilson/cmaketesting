@@ -10,7 +10,7 @@ find_package(nfd)
 find_package(rapidjson)
 # find_package(rlimgui) cant use with fetchcontent_add because it does not use cmake
 find_package(yaml-cpp)
-find_package(json)
+find_package(nlohmann_json)
 # find_package(cute)
 # find_package(physac)
 find_package(raylib)

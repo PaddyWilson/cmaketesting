@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 3.28)
 include(FetchContent)
 include(ExternalProject)
 
+message("build type " ${CMAKE_BUILD_TYPE})
+message(\"${CMAKE_VS_DEVENV_COMMAND}\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\")
+message(\"${CMAKE_VS_MSBUILD_COMMAND}\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\")
+message(\"${CMAKE_MAKE_PROGRAM}\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\")
+
 set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(
     raylib
@@ -39,7 +44,8 @@ FetchContent_Declare(
 if(CMAKE_SYSTEM_NAME MATCHES "Windows")
     set (rlPATCH_COMMAND "")
     set (rlCONFIGURE_COMMAND premake5.exe vs2022)
-    set (rlBUILD_COMMAND premake5.exe vs2022)
+    set (rlBUILD_COMMAND ${CMAKE_VS_DEVENV_COMMAND} rlImGui.sln /Rebuild "${CMAKE_BUILD_TYPE}|x64")
+    #set (rlBUILD_COMMAND '\"C:\\Program\ Files\\Microsoft\ Visual\ Studio\\2022\\Community\\Common7\\IDE\\devenv.com\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\"')
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set (rlPATCH_COMMAND chmod +x premake5)
     set (rlCONFIGURE_COMMAND ./premake5 gmake2)
@@ -61,7 +67,7 @@ ExternalProject_Add(
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui
     BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui
     #STAMP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui
-    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/Debug
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/${CMAKE_BUILD_TYPE}
 
     PATCH_COMMAND ${rlPATCH_COMMAND}
     CONFIGURE_COMMAND ${rlCONFIGURE_COMMAND}
