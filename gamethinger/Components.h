@@ -196,8 +196,8 @@ public:
 
 		b2ShapeDef shapeDef = b2DefaultShapeDef();
 		shapeDef.density = density;
-		shapeDef.friction = friction;
-		shapeDef.restitution = restitution;
+		//shapeDef.friction = friction;
+		//shapeDef.restitution = restitution;
 
 		b2ShapeId shapeId = b2CreatePolygonShape(bodyId, &shapeDef, &box);
 
@@ -240,8 +240,8 @@ public:
 
 		b2ShapeDef shapeDef = b2DefaultShapeDef();
 		shapeDef.density = density;
-		shapeDef.friction = friction;
-		shapeDef.restitution = restitution;
+		//shapeDef.friction = friction;
+		//shapeDef.restitution = restitution;
 
 		b2ShapeId shapeId = b2CreateCircleShape(bodyId, &shapeDef, &circle);
 		// b2CircleShape circle;

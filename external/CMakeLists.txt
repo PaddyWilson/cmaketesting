@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.28)
 include(FetchContent)
 include(ExternalProject)
 
+set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 FetchContent_Declare(
     raylib
     GIT_REPOSITORY https://github.com/raysan5/raylib.git
@@ -9,6 +10,7 @@ FetchContent_Declare(
     GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
+
 FetchContent_Declare(
     EnTT
     GIT_REPOSITORY https://github.com/skypjack/entt.git
@@ -16,6 +18,9 @@ FetchContent_Declare(
     GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
+
+set(YAML_CPP_BUILD_TESTS OFF CACHE BOOL "")
+set(YAML_CPP_BUILD_TOOLS OFF CACHE BOOL "")
 FetchContent_Declare(
     yaml-cpp
     GIT_REPOSITORY https://github.com/jbeder/yaml-cpp.git
@@ -74,7 +79,7 @@ set(RAPIDJSON_BUILD_EXAMPLES OFF CACHE BOOL "")
 set(RAPIDJSON_BUILD_TESTS OFF CACHE BOOL "")
 set(RAPIDJSON_BUILD_THIRDPARTY_GTEST OFF CACHE BOOL "")
 FetchContent_Declare(
-    rapidjson
+    RapidJSON
     GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
     #GIT_TAG        master
     GIT_SHALLOW true
@@ -84,12 +89,13 @@ FetchContent_Declare(
 )
 
 FetchContent_Declare(
-    json
+    nlohmann_json
     GIT_REPOSITORY https://github.com/nlohmann/json.git
     GIT_SHALLOW true
     OVERRIDE_FIND_PACKAGE
 )
 
+set(ENET_TEST off CACHE BOOL "")
 FetchContent_Declare(
     enet
     GIT_REPOSITORY https://github.com/zpl-c/enet.git
@@ -176,7 +182,13 @@ ExternalProject_Add(
 
 SET(physac_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/physac/src/physac/src CACHE INTERNAL "")
 
+set(BUILD_CURL_EXE off CACHE BOOL "")
+set(BUILD_EXAMPLES off CACHE BOOL "")
+set(BUILD_LIBCURL_DOCS off CACHE BOOL "")
+set(BUILD_MISC_DOCS off CACHE BOOL "")
+set(BUILD_TESTING off CACHE BOOL "")
 
+set(BUILD_STATIC_LIBS off CACHE BOOL "")
 set(CURL_ENABLE_SSL on CACHE BOOL "")
 FetchContent_Declare(
     curl
@@ -187,4 +199,4 @@ FetchContent_Declare(
     OVERRIDE_FIND_PACKAGE
 )
 
-FetchContent_MakeAvailable(raylib EnTT yaml-cpp json nfd enet rapidjson box2d curl)
+FetchContent_MakeAvailable(raylib EnTT yaml-cpp nlohmann_json nfd enet RapidJSON box2d curl)

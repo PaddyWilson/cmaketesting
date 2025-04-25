@@ -4,12 +4,14 @@ project(subthinger)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+#find_package(raylib)
+
 file(GLOB SOURCE_FILES "*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 # include files from ProjectB
 include_directories(${CMAKE_SOURCE_DIR}/gamethinger)
-target_link_libraries(${PROJECT_NAME} gamethingerlib)
+#target_link_libraries(${PROJECT_NAME} gamethinger)
 
 #install(TARGETS Tutorial1
 #    LIBRARY DESTINATION lib

@@ -1,19 +1,19 @@
 // GameThinger.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
-//cute_header flags
+// cute_header flags
 #define CUTE_C2_IMPLEMENTATION
 // #include <cute_c2.h>
 
-//raylib flags
-//#define SUPPORT_DEFAULT_FONT (default)
-//#define SUPPORT_CAMERA_SYSTEM
-//#define SUPPORT_GESTURES_SYSTEM
-//#define SUPPORT_MOUSE_GESTURES
-//#define SUPPORT_BUSY_WAIT_LOOP
-//#define SUPPORT_PARTIALBUSY_WAIT_LOOP
+// raylib flags
+// #define SUPPORT_DEFAULT_FONT (default)
+// #define SUPPORT_CAMERA_SYSTEM
+// #define SUPPORT_GESTURES_SYSTEM
+// #define SUPPORT_MOUSE_GESTURES
+// #define SUPPORT_BUSY_WAIT_LOOP
+// #define SUPPORT_PARTIALBUSY_WAIT_LOOP
 #define SUPPORT_SCREEN_CAPTURE
 #define SUPPORT_GIF_RECORDING
-//#define SUPPORT_COMPRESSION_API
+// #define SUPPORT_COMPRESSION_API
 #define SUPPORT_AUTOMATION_EVENTS
 
 // #define NDEBUG
@@ -21,10 +21,10 @@
 #define PHYSAC_IMPLEMENTATION
 #define PHYSAC_NO_THREADS
 
-//entt flags
-//for pointer stability
-//#define ENTT_PACKED_PAGE 1024
-//#define ENTT_USE_ATOMIC
+// entt flags
+// for pointer stability
+// #define ENTT_PACKED_PAGE 1024
+// #define ENTT_USE_ATOMIC
 
 #include <iostream>
 #include <fstream>
@@ -36,17 +36,18 @@
 #include <entt/entt.hpp>
 
 #include <box2d/box2d.h>
+#include <Collisions.h>
 
 #include "Global.h"
 #include "TextureManager.h"
 
-//systems
+// systems
 #include "SystemHeaders.h"
 
-//scenes
+// scenes
 #include "ScenesHeader.h"
 
-//imgui
+// imgui
 #include "imgui/ImguiHeader.h"
 #include "imgui/ImguiEntityEditorCustom.h"
 
@@ -59,11 +60,14 @@
 #include "TestScripts.h"
 
 #include "TheadPool.h"
+#include <nlohmann/json.hpp>
+#include "utils/Downloader.h"
 
 using namespace std;
 
-SystemManager* AddSystemsToScene(SystemManager* systemManager) {
-	//create systems
+SystemManager *AddSystemsToScene(SystemManager *systemManager)
+{
+	// create systems
 	systemManager->AddSystem(new DestroySystem());
 	systemManager->AddSystem(new InputSystem());
 	systemManager->AddSystem(new ParentChildSystem());
@@ -78,30 +82,37 @@ SystemManager* AddSystemsToScene(SystemManager* systemManager) {
 	return systemManager;
 }
 
-template<typename T>
-void RegisterComponet(Serialize& ser, ImguiEntityEditor& editor, std::string compName, int priority = 5)
+template <typename T>
+void RegisterComponet(Serialize &ser, ImguiEntityEditor &editor, std::string compName, int priority = 5)
 {
 	ser.RegisterComponent<T>(compName, priority);
 	editor.RegisterComponent<T>(compName, priority);
 }
-
+#define LIB
+#ifdef LIB
 int main(void)
 {
-	ThreadPool* threadPool = ThreadPool::GetInstance(1);
+    //string URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Shades_of_Purple.svg/1200px-Shades_of_Purple.svg.png";
+    string URL = "https://wallpapers.com/images/hd/red-texture-background-1920-x-1080-6cncopqwlb4lrtli.jpg";
+    string saveName = "purple54.png";
 
-	SetTraceLogLevel(7);//debug level. 7 hides everything
+	Downloader::Download(URL, saveName);
+
+	ThreadPool *threadPool = ThreadPool::GetInstance(1);
+
+	SetTraceLogLevel(7); // debug level. 7 hides everything
 
 	// i know you can just or them together
 	SetConfigFlags(FLAG_WINDOW_RESIZABLE);
 	SetConfigFlags(FLAG_WINDOW_ALWAYS_RUN);
 	SetConfigFlags(FLAG_MSAA_4X_HINT);
-	//SetConfigFlags(FLAG_VSYNC_HINT);
+	// SetConfigFlags(FLAG_VSYNC_HINT);
 	InitWindow(Global::ScreenWidth, Global::ScreenHeight, "raylib [core] example - basic window");
 
 	InitAudioDevice();
 	SetTargetFPS(200);
 
-	rlImGuiSetup(true);//imgui
+	rlImGuiSetup(true); // imgui
 	TextureManager::Init();
 
 	ScriptRegistry::RegisterScript<TestController>();
@@ -110,7 +121,7 @@ int main(void)
 	ScriptRegistry::RegisterScript<MeteorController>();
 	ScriptRegistry::RegisterScript<MeteorSpawnerScript>();
 
-	//create ecs
+	// create ecs
 	SceneManager sceneManager;
 	sceneManager.AddScene(new BlankScene());
 	AddSystemsToScene(sceneManager.GetActiveScene()->GetSystemManager());
@@ -138,7 +149,7 @@ int main(void)
 	Texture2D texture = LoadTextureFromImage(largeimage);
 	UnloadImage(largeimage);*/
 
-	vector<ImguiWindow*> imguiWindows;
+	vector<ImguiWindow *> imguiWindows;
 
 	ImguiSystemsWindow systemWindow;
 	imguiWindows.push_back(&systemWindow);
@@ -147,7 +158,7 @@ int main(void)
 	editor2.IsOpen = true;
 	imguiWindows.push_back(&editor2);
 
-	//maybe have one static class to register components
+	// maybe have one static class to register components
 	Serialize serializer;
 	RegisterComponet<UniqueID>(serializer, editor2, "UniqueID", 0);
 	RegisterComponet<Tag>(serializer, editor2, "Tag", 0);
@@ -160,7 +171,7 @@ int main(void)
 	RegisterComponet<TextComp>(serializer, editor2, "TextComp");
 	RegisterComponet<CircleComp>(serializer, editor2, "CircleComp");
 	RegisterComponet<RectangleComp>(serializer, editor2, "RectangleComp");
-	//RegisterComponet<ColorComp>(serializer, editor2, "ColorComp");
+	// RegisterComponet<ColorComp>(serializer, editor2, "ColorComp");
 	RegisterComponet<SpriteComp>(serializer, editor2, "SpriteComp");
 	RegisterComponet<Renderable>(serializer, editor2, "Renderable");
 	RegisterComponet<RenderableUI>(serializer, editor2, "RenderableUI");
@@ -170,7 +181,7 @@ int main(void)
 	RegisterComponet<BB_POLY>(serializer, editor2, "BB_POLY");
 	RegisterComponet<BB_CAP>(serializer, editor2, "BB_CAP");
 	RegisterComponet<Parent>(serializer, editor2, "Parent");
-	//RegisterComponet<Children>(serializer, editor2, "Children");
+	// RegisterComponet<Children>(serializer, editor2, "Children");
 	RegisterComponet<ChildPosition>(serializer, editor2, "ChildPosition");
 	RegisterComponet<ScriptComp>(serializer, editor2, "ScriptComp");
 	RegisterComponet<DestroyFlag>(serializer, editor2, "DestroyFlag");
@@ -179,20 +190,21 @@ int main(void)
 	imguiWindows.push_back(&testWindow);
 
 	bool Quit = false,
-		ImGuiDemoOpen = false,
-		showFPS = true,
-		capFPS = true;
+		 ImGuiDemoOpen = false,
+		 showFPS = true,
+		 capFPS = true;
 
-	//Setup ImGui menu bar
+	// Setup ImGui menu bar
 	ImguiMenu::SetSceneManager(&sceneManager);
 
-	ImguiMenu::AddFileMenu("Open", [&] {
+	ImguiMenu::AddFileMenu("Open", [&]
+						   {
 		string filePath;
 		cout << filePath << endl;
 		if (OpenFileDialog(GetWorkingDirectory(), filePath))
-			serializer.Load(filePath, sceneManager.GetActiveScene());
-		});
-	ImguiMenu::AddFileMenu("Load", [&] {
+			serializer.Load(filePath, sceneManager.GetActiveScene()); });
+	ImguiMenu::AddFileMenu("Load", [&]
+						   {
 		sceneManager.GetActiveScene()->ClearScene();
 		serializer.Load("Testing.yml", sceneManager.GetActiveScene());
 		//this should be some where else
@@ -210,20 +222,22 @@ int main(void)
 			auto cir = registry->try_get<Rigidbody2DCircle>(entity);
 			if (cir)
 				cir->Init(body);
-		}
-		});
-	ImguiMenu::AddFileMenu("Save", [&] { serializer.Save("Testing.yml", sceneManager.GetActiveScene()); });
-	ImguiMenu::AddFileMenu("Save as", [&] {
+		} });
+	ImguiMenu::AddFileMenu("Save", [&]
+						   { serializer.Save("Testing.yml", sceneManager.GetActiveScene()); });
+	ImguiMenu::AddFileMenu("Save as", [&]
+						   {
 		string filePath;
 		cout << filePath << endl;
 		if (SaveFileDialog(GetWorkingDirectory(), filePath))
-			serializer.Save(filePath, sceneManager.GetActiveScene());
-		});
-	ImguiMenu::AddFileMenu("Clear", [&] { sceneManager.GetActiveScene()->ClearScene(); });
+			serializer.Save(filePath, sceneManager.GetActiveScene()); });
+	ImguiMenu::AddFileMenu("Clear", [&]
+						   { sceneManager.GetActiveScene()->ClearScene(); });
 	ImguiMenu::AddFileMenu("Quit", &Quit);
 
 	ImguiMenu::AddWindowMenu("Show FPS", &showFPS);
-	ImguiMenu::AddWindowMenu("Cap FPS", [&] {if (capFPS) { SetTargetFPS(0); capFPS = !capFPS; } else { SetTargetFPS(120); capFPS = !capFPS; } });
+	ImguiMenu::AddWindowMenu("Cap FPS", [&]
+							 {if (capFPS) { SetTargetFPS(0); capFPS = !capFPS; } else { SetTargetFPS(120); capFPS = !capFPS; } });
 	ImguiMenu::AddWindowMenu("ImGui Demo", &ImGuiDemoOpen);
 
 	ImguiMenu::AddCustomWindow(&editor2);
@@ -233,16 +247,21 @@ int main(void)
 	for (size_t i = 0; i < imguiWindows.size(); i++)
 		imguiWindows[i]->Init();
 
-	//event testing
-	enum Tests { test };
+	// event testing
+	enum Tests
+	{
+		test
+	};
 
-	EventManager::AddListener<Tests>([&](Tests t) { cout << "Tests" << endl; });
-	EventManager::AddListener<Tests>([&](Tests t) { cout << "Tests 2" << endl; });
+	EventManager::AddListener<Tests>([&](Tests t)
+									 { cout << "Tests" << endl; });
+	EventManager::AddListener<Tests>([&](Tests t)
+									 { cout << "Tests 2" << endl; });
 
 	Tests tes = Tests::test;
 	EventManager::TriggerEvent<Tests>(tes);
 
-	//Downloader::Download("https://cards.scryfall.io/png/front/9/4/94eea6e3-20bc-4dab-90ba-3113c120fb90.png?1670031714", (string)GetWorkingDirectory() + "\\card.png");
+	// Downloader::Download("https://cards.scryfall.io/png/front/9/4/94eea6e3-20bc-4dab-90ba-3113c120fb90.png?1670031714", (string)GetWorkingDirectory() + "\\card.png");
 
 	/*auto asdf = LoadDirectoryFiles(GetWorkingDirectory());
 	for (size_t i = 0; i < asdf.count; i++)
@@ -257,7 +276,7 @@ int main(void)
 
 		TextureManager::Update();
 		rlImGuiBegin();
-		//start update 
+		// start update
 
 		bool updateScreenSize = false;
 		updateScreenSize = GetScreenHeight() != Global::ScreenHeight;
@@ -270,49 +289,50 @@ int main(void)
 			Global::ScreenWidth = GetScreenWidth();
 		}
 
-		//if (IsKeyPressed(KEY_S))
+		// if (IsKeyPressed(KEY_S))
 		//	TakeScreenshot("test.png");
 
 		sceneManager.Update(GetFrameTime());
 		testWindow.Update();
 
-		//end update
+		// end update
 		//----------------------------
-		//start draw
+		// start draw
 		BeginDrawing();
 		ClearBackground(RAYWHITE);
-		//in camera
+		// in camera
 
-		//moved to render system
-		//BeginMode2D(camera);		
+		// moved to render system
+		// BeginMode2D(camera);
 
 		sceneManager.Render();
 
-		//end camera
-		//EndMode2D();
+		// end camera
+		// EndMode2D();
 
-		//render ui
+		// render ui
 		sceneManager.RenderUI();
 		testWindow.Draw();
 
-		//DrawRing(pos, 100, 200, 0, 390, 2, RED);
+		// DrawRing(pos, 100, 200, 0, 390, 2, RED);
 
-		if (ImGuiDemoOpen) {
+		if (ImGuiDemoOpen)
+		{
 			// show ImGui Content
 			ImGui::ShowDemoWindow(&ImGuiDemoOpen);
 		}
 
-		//menu bar
+		// menu bar
 		ImguiMenu::DrawMenu();
 
-		//editor.SetRegistryAndEntity(sceneManager.GetActiveScene()->registry, &editorEntity);
+		// editor.SetRegistryAndEntity(sceneManager.GetActiveScene()->registry, &editorEntity);
 		editor2.SetRegistry(sceneManager.GetActiveScene()->GetRegistry());
 		systemWindow.systemManager = sceneManager.GetActiveScene()->GetSystemManager();
 
 		for (size_t i = 0; i < imguiWindows.size(); i++)
 			imguiWindows[i]->Draw();
 
-		rlImGuiEnd();//imgui end
+		rlImGuiEnd(); // imgui end
 
 		if (showFPS)
 			DrawFPS(10, 20);
@@ -325,22 +345,23 @@ int main(void)
 
 		DrawSplineLinear(&points, 4, 2, PURPLE);*/
 
-		//std::cout << "" << GetMousePosition().x <<":" << GetMousePosition().y << endl;
+		// std::cout << "" << GetMousePosition().x <<":" << GetMousePosition().y << endl;
 
-		//end draw
+		// end draw
 		EndDrawing();
 
-		//SwapScreenBuffer();
-		//PollInputEvents();
-		//WaitTime(double seconds);
+		// SwapScreenBuffer();
+		// PollInputEvents();
+		// WaitTime(double seconds);
 	}
 
 	threadPool->StopThreads();
 
 	TextureManager::End();
-	rlImGuiShutdown();		// cleans up ImGui
+	rlImGuiShutdown(); // cleans up ImGui
 
 	CloseAudioDevice();
 	CloseWindow();
 	return 0;
 }
+#endif
