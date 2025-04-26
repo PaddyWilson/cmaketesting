@@ -8,6 +8,7 @@ project(root_project)
 
 add_subdirectory(external)
 
+add_subdirectory(includeLibs)
 add_subdirectory(src)
 add_subdirectory(src2)
 add_subdirectory(src3)

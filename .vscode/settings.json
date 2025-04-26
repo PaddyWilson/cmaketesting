@@ -59,8 +59,8 @@
   "makefile.makefilePath": "build",
   "makefile.launchConfigurations": [
     {
-      "cwd": "${workspaceFolder}/out",
-      "binaryPath": "${workspace}/out/PremakeTesting",
+      "cwd": "${workspaceFolder}/build",
+      "binaryPath": "${workspaceFolder}/build/gamethinger/gamethinger",
       "binaryArgs": []
     }
   ]

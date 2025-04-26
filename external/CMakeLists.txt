@@ -49,8 +49,18 @@ if(CMAKE_SYSTEM_NAME MATCHES "Windows")
 elseif(CMAKE_SYSTEM_NAME MATCHES "Linux")
     set (rlPATCH_COMMAND chmod +x premake5)
     set (rlCONFIGURE_COMMAND ./premake5 gmake2)
-    set (rlBUILD_COMMAND make)
-ENDIF()
+    if(CMAKE_BUILD_TYPE MATCHES "Release")
+        set (rlBUILD_COMMAND make config=release_x64)
+    else()
+        set (rlBUILD_COMMAND make config=debug_x64)
+    endif()
+endif()
+
+if(CMAKE_BUILD_TYPE MATCHES "Release")
+    set (rlimgui_CMAKE_BUILD_TYPE Release CACHE INTERNAL "")
+else()
+    set (rlimgui_CMAKE_BUILD_TYPE Debug CACHE INTERNAL "")
+endif()
 
 ExternalProject_Add(
     rlimguiDownload
@@ -67,7 +77,7 @@ ExternalProject_Add(
     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui
     BINARY_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui
     #STAMP_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui
-    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/${CMAKE_BUILD_TYPE}
+    INSTALL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/${rlimgui_CMAKE_BUILD_TYPE}
 
     PATCH_COMMAND ${rlPATCH_COMMAND}
     CONFIGURE_COMMAND ${rlCONFIGURE_COMMAND}
@@ -75,7 +85,7 @@ ExternalProject_Add(
     INSTALL_COMMAND ""
 )
 SET(rlimgui_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui CACHE INTERNAL "")
-SET(rlimgui_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/Debug CACHE INTERNAL "")
+SET(rlimgui_LIB_DIR ${CMAKE_CURRENT_SOURCE_DIR}/rlimgui/src/rlimgui/bin/${rlimgui_CMAKE_BUILD_TYPE} CACHE INTERNAL "")
 
 # add_library(rlimgui STATIC IMPORTED)
 # set_target_properties(rlimgui PROPERTIES IMPORTED_LOCATION ${rlimgui_LIB_DIR}/librlImGui.a)

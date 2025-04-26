@@ -10,8 +10,8 @@ file(GLOB SOURCE_FILES "*.cpp")
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 # include files from ProjectB
-include_directories(${CMAKE_SOURCE_DIR}/gamethinger)
-#target_link_libraries(${PROJECT_NAME} gamethinger)
+# include_directories(${CMAKE_SOURCE_DIR}/gamethinger)
+target_link_libraries(${PROJECT_NAME} includeLibs)
 
 #install(TARGETS Tutorial1
 #    LIBRARY DESTINATION lib

@@ -92,8 +92,8 @@ void RegisterComponet(Serialize &ser, ImguiEntityEditor &editor, std::string com
 #ifdef LIB
 int main(void)
 {
-    //string URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Shades_of_Purple.svg/1200px-Shades_of_Purple.svg.png";
-    string URL = "https://wallpapers.com/images/hd/red-texture-background-1920-x-1080-6cncopqwlb4lrtli.jpg";
+    string URL = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Shades_of_Purple.svg/1200px-Shades_of_Purple.svg.png";
+    //string URL = "https://wallpapers.com/images/hd/red-texture-background-1920-x-1080-6cncopqwlb4lrtli.jpg";
     string saveName = "purple54.png";
 
 	Downloader::Download(URL, saveName);
