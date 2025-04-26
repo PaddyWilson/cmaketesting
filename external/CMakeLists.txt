@@ -3,6 +3,16 @@ include(FetchContent)
 include(ExternalProject)
 
 message("build type " ${CMAKE_BUILD_TYPE})
+
+if(CMAKE_SYSTEM_NAME MATCHES "Windows")
+    if(CMAKE_BUILD_TYPE MATCHES "Release")
+        set (CMAKE_BUILD_TYPE Release CACHE INTERNAL "")
+    else()
+        set (CMAKE_BUILD_TYPE Debug CACHE INTERNAL "")
+    endif()
+endif()
+
+message("build type " ${CMAKE_BUILD_TYPE})
 message(\"${CMAKE_VS_DEVENV_COMMAND}\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\")
 message(\"${CMAKE_VS_MSBUILD_COMMAND}\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\")
 message(\"${CMAKE_MAKE_PROGRAM}\"\ \"rlImGui.sln\"\ /Rebuild\ \"${CMAKE_BUILD_TYPE}|x64\")
